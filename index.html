@@ -176,7 +176,7 @@
             window.addEventListener('resize', resizeCanvas);
             resizeCanvas();
             
-            // 低饱和度配色方案
+            // 低饱和度配色
             const lowSaturationColors = [
                 { h: 30, s: 55, l: 55 },   // 橙色
                 { h: 180, s: 45, l: 60 },  // 青色
@@ -186,7 +186,7 @@
                 { h: 210, s: 55, l: 65 }   // 蓝色
             ];
             
-            // 初三学生祝福语
+            // 祝福语
             const blessings = [
                 "学业进步",
                 "金榜题名",
@@ -448,7 +448,7 @@
             
             animate();
             
-            // 点击区域事件
+            // 点击区域显示
             const clickArea = document.getElementById('click-area');
             const surprise = document.getElementById('surprise');
             let isSurpriseVisible = false;
@@ -458,7 +458,7 @@
                     surprise.classList.add('show');
                     isSurpriseVisible = true;
                     
-                    // 6秒后自动隐藏
+                    // 6秒后自动隐藏文字
                     setTimeout(() => {
                         surprise.classList.remove('show');
                         isSurpriseVisible = false;
@@ -466,7 +466,7 @@
                 }
             });
             
-            // 长按支持
+            // 长按显示
             let longPressTimer;
             let isLongPress = false;
             
