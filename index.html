@@ -13,7 +13,7 @@
         
         body {
             overflow: hidden;
-            background: #0a0a1a;
+            background: linear-gradient(135deg, #1a0a33 0%, #0a1a33 100%);
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Microsoft YaHei', sans-serif;
             height: 100vh;
             color: white;
@@ -55,88 +55,123 @@
         
         .dynamic-blessing {
             position: absolute;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 300;
             opacity: 0;
-            transform: translate(-50%, -50%) scale(0.8);
-            transition: all 0.4s ease-out;
+            transform: translate(-50%, -50%) scale(0.7);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             white-space: nowrap;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-            pointer-events: none;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+            letter-spacing: 2px;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
         }
         
         .dynamic-blessing.show {
-            opacity: 0.95;
-            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+            animation: float 2.5s ease-in-out forwards;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) scale(1.1); }
+            50% { transform: translate(-50%, -60%) scale(1); }
+            100% { transform: translate(-50%, -65%) scale(0.95); opacity: 0.9; }
         }
         
         .greeting {
-            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-size: clamp(3rem, 10vw, 6.5rem);
             font-weight: 400;
-            text-shadow: 0 0 20px rgba(255, 235, 180, 0.9),
-                         0 0 40px rgba(255, 200, 150, 0.8),
-                         0 0 60px rgba(255, 180, 100, 0.7);
-            background: linear-gradient(45deg, #FFD700, #FFC000, #FFA500, #FF8C00);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+                         0 0 40px rgba(255, 215, 0, 0.7),
+                         0 0 60px rgba(255, 105, 180, 0.5);
+            background: linear-gradient(45deg, #ff8a00, #ff00aa, #6a11cb, #4a00ff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: 3px;
-            margin-bottom: 30px;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
             animation: glow 2s ease-in-out infinite alternate;
+            position: relative;
+        }
+        
+        .greeting::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ff8a00, #ff00aa, #6a11cb, transparent);
+            border-radius: 2px;
+            animation: gradientFlow 3s infinite linear;
+        }
+        
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
         
         @keyframes glow {
             from {
-                text-shadow: 0 0 15px rgba(255, 235, 180, 0.7),
-                             0 0 25px rgba(255, 200, 150, 0.6),
-                             0 0 35px rgba(255, 180, 100, 0.5);
+                text-shadow: 0 0 15px rgba(255, 255, 255, 0.3),
+                             0 0 25px rgba(255, 215, 0, 0.5),
+                             0 0 35px rgba(255, 105, 180, 0.4);
             }
             to {
-                text-shadow: 0 0 25px rgba(255, 235, 180, 1),
-                             0 0 45px rgba(255, 200, 150, 0.9),
-                             0 0 65px rgba(255, 180, 100, 0.8);
+                text-shadow: 0 0 25px rgba(255, 255, 255, 0.6),
+                             0 0 45px rgba(255, 215, 0, 0.8),
+                             0 0 65px rgba(255, 105, 180, 0.7);
             }
+        }
+        
+        .hint-container {
+            position: relative;
+            margin-top: 30px;
+            background: rgba(30, 15, 50, 0.6);
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            padding: 12px 25px;
+            border: 1px solid rgba(150, 100, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            pointer-events: auto;
+            animation: pulse 3s infinite;
         }
         
         .hint {
-            font-size: clamp(0.85rem, 2.6vw, 1.2rem);
-            color: rgba(220, 240, 255, 0.85);
-            max-width: 650px;
-            line-height: 1.7;
-            margin-top: 25px;
-            text-shadow: 0 0 8px rgba(150, 200, 255, 0.7);
+            font-size: clamp(0.9rem, 2.8vw, 1.35rem);
+            color: rgba(220, 240, 255, 0.95);
+            line-height: 1.6;
+            text-shadow: 0 0 5px rgba(150, 200, 255, 0.6);
             font-weight: 300;
-            animation: pulse 2.5s infinite;
-            pointer-events: auto;
-            cursor: pointer;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
         
         @keyframes pulse {
-            0% { opacity: 0.7; transform: scale(0.98); }
-            50% { opacity: 1; transform: scale(1.02); }
-            100% { opacity: 0.7; transform: scale(0.98); }
+            0% { box-shadow: 0 0 10px rgba(150, 100, 255, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(150, 100, 255, 0.5); }
+            100% { box-shadow: 0 0 10px rgba(150, 100, 255, 0.2); }
         }
         
         #surprise {
             position: fixed;
             bottom: 25px;
             left: 50%;
-            transform: translateX(-50%) scale(0.8);
-            font-size: clamp(0.7rem, 2.2vw, 1.1rem);
-            color: rgba(255, 215, 0, 0.95);
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8),
-                         0 0 20px rgba(255, 180, 100, 0.7);
+            transform: translateX(-50%);
+            font-size: clamp(0.75rem, 2.2vw, 1.1rem);
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.92);
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.6),
+                         0 0 12px rgba(200, 200, 255, 0.4);
             z-index: 20;
             opacity: 0;
-            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            letter-spacing: 1.2px;
+            transition: opacity 0.6s ease-in-out;
+            letter-spacing: 1.5px;
             pointer-events: none;
-            font-weight: 300;
+            white-space: nowrap;
         }
         
         #surprise.show {
-            transform: translateX(-50%) scale(1);
             opacity: 1;
         }
         
@@ -145,9 +180,19 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 180px;
+            height: 200px;
             z-index: 15;
             cursor: pointer;
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: white;
+            opacity: 0.6;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -156,7 +201,9 @@
     <div id="dynamic-blessings"></div>
     <div class="content">
         <h1 class="greeting">新年快乐</h1>
-        <p class="hint">点一下页面底部空白部分，有惊喜（如未显示请长按空白处）</p>
+        <div class="hint-container">
+            <p class="hint">点一下页面底部空白部分（如未显示请长按空白处）</p>
+        </div>
     </div>
     <div id="surprise">5oiR5Zac5qyi5L2g</div>
     <div id="click-area"></div>
@@ -167,7 +214,6 @@
             const ctx = canvas.getContext('2d');
             let width, height;
             
-            // 调整canvas大小
             function resizeCanvas() {
                 width = canvas.width = window.innerWidth;
                 height = canvas.height = window.innerHeight;
@@ -176,33 +222,25 @@
             window.addEventListener('resize', resizeCanvas);
             resizeCanvas();
             
-            // 低饱和度配色
-            const lowSaturationColors = [
-                { h: 30, s: 55, l: 55 },   // 橙色
-                { h: 180, s: 45, l: 60 },  // 青色
-                { h: 270, s: 50, l: 55 },  // 紫色
-                { h: 0, s: 45, l: 60 },    // 红色
-                { h: 50, s: 60, l: 65 },   // 金色
-                { h: 210, s: 55, l: 65 }   // 蓝色
+            // 丰富的烟花颜色
+            const vibrantColors = [
+                { h: 0, s: 100, l: 65 },    // 亮红
+                { h: 30, s: 100, l: 70 },   // 亮橙
+                { h: 60, s: 100, l: 75 },   // 亮黄
+                { h: 120, s: 80, l: 65 },   // 亮绿
+                { h: 180, s: 90, l: 70 },   // 亮青
+                { h: 210, s: 95, l: 75 },   // 亮蓝
+                { h: 270, s: 90, l: 70 },   // 亮紫
+                { h: 300, s: 95, l: 75 },   // 亮粉
+                { h: 330, s: 100, l: 70 }   // 亮洋红
             ];
             
-            // 祝福语
+            // 初三学生祝福语
             const blessings = [
-                "学业进步",
-                "金榜题名",
-                "快乐成长",
-                "梦想成真",
-                "前程似锦",
-                "健康平安",
-                "天天开心",
-                "万事如意",
-                "智慧如海",
-                "勇攀高峰",
-                "青春飞扬",
-                "自信阳光",
-                "友谊长存",
-                "收获满满",
-                "未来可期"
+                "学业进步", "金榜题名", "快乐成长", "梦想成真", "前程似锦",
+                "健康平安", "天天开心", "万事如意", "智慧如海", "勇攀高峰",
+                "青春飞扬", "自信阳光", "友谊长存", "收获满满", "未来可期",
+                "考试顺利", "心想事成", "活力满满", "闪闪发光", "天天向上"
             ];
             
             // 创建动态祝福语
@@ -211,15 +249,14 @@
                 const blessingEl = document.createElement('div');
                 blessingEl.className = 'dynamic-blessing';
                 
-                // 随机祝福语
                 const blessingText = blessings[Math.floor(Math.random() * blessings.length)];
                 blessingEl.textContent = blessingText;
                 
                 // 随机颜色
-                const color = lowSaturationColors[Math.floor(Math.random() * lowSaturationColors.length)];
+                const color = vibrantColors[Math.floor(Math.random() * vibrantColors.length)];
                 const hue = (color.h + (Math.random() - 0.5) * 20 + 360) % 360;
-                const sat = Math.max(55, Math.min(75, color.s + (Math.random() - 0.5) * 15));
-                const light = Math.max(80, Math.min(95, color.l + (Math.random() - 0.5) * 10));
+                const sat = Math.max(85, Math.min(100, color.s));
+                const light = Math.max(80, Math.min(95, color.l));
                 blessingEl.style.color = `hsl(${hue}, ${sat}%, ${light}%)`;
                 
                 // 位置
@@ -233,15 +270,16 @@
                     blessingEl.classList.add('show');
                 }, 10);
                 
-                // 2.5秒后淡出
+                // 2.8秒后淡出
                 setTimeout(() => {
-                    blessingEl.classList.remove('show');
+                    blessingEl.style.opacity = '0';
+                    blessingEl.style.transform = 'translate(-50%, -50%) scale(0.9)';
                     setTimeout(() => {
                         if (blessingEl.parentNode) {
                             blessingEl.parentNode.removeChild(blessingEl);
                         }
                     }, 400);
-                }, 2500);
+                }, 2800);
             }
             
             // 烟花类
@@ -249,18 +287,28 @@
                 constructor() {
                     // 随机水平位置 (覆盖整个宽度)
                     this.x = Math.random() * width;
-                    this.y = height;
-                    // 随机高度范围扩大到5%-95%的屏幕高度
-                    this.targetY = height * (0.05 + Math.random() * 0.9);
-                    this.speed = 8 + Math.random() * 6;
-                    this.colorIndex = Math.floor(Math.random() * lowSaturationColors.length);
-                    this.color = lowSaturationColors[this.colorIndex];
+                    this.y = height + 50; // 从屏幕外开始
+                    
+                    // 获取"新年快乐"元素位置
+                    const greetingEl = document.querySelector('.greeting');
+                    if (greetingEl) {
+                        const rect = greetingEl.getBoundingClientRect();
+                        const greetingTop = rect.top + window.scrollY;
+                        // 爆炸位置在"新年快乐"文字上方（屏幕顶部15%-50%区域）
+                        this.targetY = greetingTop * (0.15 + Math.random() * 0.35);
+                    } else {
+                        // 默认位置（屏幕顶部25%-60%）
+                        this.targetY = height * (0.25 + Math.random() * 0.35);
+                    }
+                    
+                    this.speed = 12 + Math.random() * 8;
+                    this.colorIndex = Math.floor(Math.random() * vibrantColors.length);
+                    this.color = vibrantColors[this.colorIndex];
                     this.trail = [];
                     this.particles = [];
                     this.exploded = false;
-                    this.explosionSize = 100 + Math.random() * 150;
-                    this.particleCount = 100 + Math.floor(Math.random() * 150);
-                    this.trailLength = 15;
+                    this.particleCount = 120 + Math.floor(Math.random() * 180);
+                    this.trailLength = 20;
                     this.trailIndex = 0;
                 }
                 
@@ -268,7 +316,7 @@
                     if (!this.exploded) {
                         // 上升阶段
                         this.y -= this.speed;
-                        this.speed *= 0.95;
+                        this.speed *= 0.93;
                         
                         // 添加轨迹点
                         this.trail[this.trailIndex] = { x: this.x, y: this.y };
@@ -293,9 +341,9 @@
                     // 生成粒子
                     for (let i = 0; i < this.particleCount; i++) {
                         const angle = Math.random() * Math.PI * 2;
-                        const speed = 1 + Math.random() * 8;
-                        const size = 1 + Math.random() * 3.5;
-                        const colorOffset = (Math.random() - 0.5) * 20;
+                        const speed = 1 + Math.random() * 12;
+                        const size = 0.8 + Math.random() * 4;
+                        const colorOffset = (Math.random() - 0.5) * 40;
                         
                         this.particles.push(new Particle(
                             this.x,
@@ -304,11 +352,39 @@
                             Math.sin(angle) * speed,
                             {
                                 h: (this.color.h + colorOffset + 360) % 360,
-                                s: Math.min(65, this.color.s + 10),
-                                l: Math.max(40, this.color.l - 15)
+                                s: Math.min(100, this.color.s + 10),
+                                l: Math.max(70, this.color.l - 15)
                             },
                             size
                         ));
+                    }
+                    
+                    // 产生小火花
+                    for (let i = 0; i < 20; i++) {
+                        setTimeout(() => {
+                            const sparkle = document.createElement('div');
+                            sparkle.className = 'sparkle';
+                            sparkle.style.left = `${this.x + (Math.random() - 0.5) * 30}px`;
+                            sparkle.style.top = `${this.y + (Math.random() - 0.5) * 30}px`;
+                            document.body.appendChild(sparkle);
+                            
+                            // 随机颜色
+                            const color = vibrantColors[Math.floor(Math.random() * vibrantColors.length)];
+                            sparkle.style.background = `hsl(${color.h}, ${color.s}%, ${color.l}%)`;
+                            
+                            // 动画
+                            sparkle.animate([
+                                { transform: 'scale(0)', opacity: '1' },
+                                { transform: 'scale(1.5)', opacity: '0' }
+                            ], {
+                                duration: 800,
+                                easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+                            });
+                            
+                            setTimeout(() => {
+                                sparkle.remove();
+                            }, 800);
+                        }, i * 20);
                     }
                 }
                 
@@ -318,7 +394,10 @@
                         ctx.beginPath();
                         ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
                         ctx.fillStyle = `hsl(${this.color.h}, ${this.color.s}%, ${this.color.l}%)`;
+                        ctx.shadowBlur = 15;
+                        ctx.shadowColor = `hsl(${this.color.h}, ${this.color.s}%, ${this.color.l}%)`;
                         ctx.fill();
+                        ctx.shadowBlur = 0;
                         
                         // 绘制轨迹
                         ctx.beginPath();
@@ -326,11 +405,14 @@
                             const index = (this.trailIndex + i) % this.trailLength;
                             if (this.trail[index]) {
                                 const opacity = i / this.trailLength;
-                                ctx.globalAlpha = opacity;
+                                ctx.globalAlpha = opacity * 0.8;
                                 ctx.beginPath();
-                                ctx.arc(this.trail[index].x, this.trail[index].y, 2 + i * 0.3, 0, Math.PI * 2);
+                                ctx.arc(this.trail[index].x, this.trail[index].y, 1.5 + i * 0.2, 0, Math.PI * 2);
                                 ctx.fillStyle = `hsla(${this.color.h}, ${this.color.s}%, ${this.color.l}%, ${opacity})`;
+                                ctx.shadowBlur = 5;
+                                ctx.shadowColor = `hsla(${this.color.h}, ${this.color.s}%, ${this.color.l}%, ${opacity})`;
                                 ctx.fill();
+                                ctx.shadowBlur = 0;
                             }
                         }
                         ctx.globalAlpha = 1;
@@ -350,10 +432,10 @@
                     this.vy = vy;
                     this.color = color;
                     this.size = size;
-                    this.gravity = 0.15;
-                    this.friction = 0.98;
+                    this.gravity = 0.12;
+                    this.friction = 0.97;
                     this.alpha = 1;
-                    this.decay = 0.96 + Math.random() * 0.02;
+                    this.decay = 0.96 + Math.random() * 0.03;
                 }
                 
                 update() {
@@ -367,7 +449,7 @@
                     
                     // 衰减
                     this.alpha *= this.decay;
-                    this.size *= this.decay;
+                    this.size *= 0.99;
                     
                     return this.alpha > 0.01 && this.size > 0.1;
                 }
@@ -386,21 +468,22 @@
             class Star {
                 constructor() {
                     this.x = Math.random() * width;
-                    this.y = Math.random() * height * 0.7;
-                    this.size = Math.random() * 1.5 + 0.5;
-                    this.brightness = 0.2 + Math.random() * 0.8;
-                    this.twinkleSpeed = 0.01 + Math.random() * 0.03;
+                    this.y = Math.random() * height * 0.8;
+                    this.size = Math.random() * 2 + 0.8;
+                    this.brightness = 0.3 + Math.random() * 0.7;
+                    this.twinkleSpeed = 0.01 + Math.random() * 0.04;
                     this.twinklePhase = Math.random() * Math.PI * 2;
+                    this.color = vibrantColors[Math.floor(Math.random() * vibrantColors.length)];
                 }
                 
                 update() {
-                    this.brightness = 0.4 + Math.abs(Math.sin(Date.now() * this.twinkleSpeed + this.twinklePhase)) * 0.6;
+                    this.brightness = 0.3 + Math.abs(Math.sin(Date.now() * this.twinkleSpeed + this.twinklePhase)) * 0.6;
                 }
                 
                 draw() {
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(255, 255, 255, ${this.brightness})`;
+                    ctx.fillStyle = `hsla(${this.color.h}, ${this.color.s}%, ${this.color.l}%, ${this.brightness})`;
                     ctx.fill();
                 }
             }
@@ -410,45 +493,48 @@
             let lastFireworkTime = 0;
             
             // 初始化星星
-            for (let i = 0; i < 200; i++) {
+            for (let i = 0; i < 300; i++) {
                 stars.push(new Star());
             }
             
-            // 动画循环
-            function animate() {
-                ctx.fillStyle = 'rgba(10, 10, 30, 0.15)';
-                ctx.fillRect(0, 0, width, height);
-                
-                // 更新和绘制星星
-                stars.forEach(star => {
-                    star.update();
-                    star.draw();
-                });
-                
-                // 定时发射烟花
-                const now = Date.now();
-                if (now - lastFireworkTime > 800 + Math.random() * 1200) {
-                    fireworks.push(new Firework());
-                    lastFireworkTime = now;
-                }
-                
-                // 更新和绘制烟花
-                for (let i = fireworks.length - 1; i >= 0; i--) {
-                    fireworks[i].update();
-                    fireworks[i].draw();
+            // 等待DOM加载完成，确保能获取到.greeting元素
+            setTimeout(() => {
+                // 动画循环
+                function animate() {
+                    ctx.fillStyle = 'rgba(10, 5, 25, 0.1)';
+                    ctx.fillRect(0, 0, width, height);
                     
-                    // 移除已经消失的烟花
-                    if (fireworks[i].exploded && fireworks[i].particles.length === 0) {
-                        fireworks.splice(i, 1);
+                    // 更新和绘制星星
+                    stars.forEach(star => {
+                        star.update();
+                        star.draw();
+                    });
+                    
+                    // 定时发射烟花
+                    const now = Date.now();
+                    if (now - lastFireworkTime > 600 + Math.random() * 800) {
+                        fireworks.push(new Firework());
+                        lastFireworkTime = now;
                     }
+                    
+                    // 更新和绘制烟花
+                    for (let i = fireworks.length - 1; i >= 0; i--) {
+                        fireworks[i].update();
+                        fireworks[i].draw();
+                        
+                        // 移除已经消失的烟花
+                        if (fireworks[i].exploded && fireworks[i].particles.length === 0) {
+                            fireworks.splice(i, 1);
+                        }
+                    }
+                    
+                    requestAnimationFrame(animate);
                 }
                 
-                requestAnimationFrame(animate);
-            }
+                animate();
+            }, 100);
             
-            animate();
-            
-            // 点击区域显示
+            // 点击区域事件
             const clickArea = document.getElementById('click-area');
             const surprise = document.getElementById('surprise');
             let isSurpriseVisible = false;
@@ -458,7 +544,7 @@
                     surprise.classList.add('show');
                     isSurpriseVisible = true;
                     
-                    // 6秒后自动隐藏文字
+                    // 6秒后自动隐藏
                     setTimeout(() => {
                         surprise.classList.remove('show');
                         isSurpriseVisible = false;
@@ -466,7 +552,7 @@
                 }
             });
             
-            // 长按显示
+            // 长按支持
             let longPressTimer;
             let isLongPress = false;
             
@@ -479,7 +565,7 @@
                         surprise.classList.add('show');
                         isSurpriseVisible = true;
                     }
-                }, 600);
+                }, 500);
             });
             
             clickArea.addEventListener('touchend', () => {
