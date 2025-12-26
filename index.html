@@ -81,6 +81,52 @@
       }
     }
     
+    .friendship-question {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 3rem;
+      color: #fbbf24;
+    }
+    
+    .friendship-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .friend-btn {
+      background: rgba(30, 58, 138, 0.3);
+      color: white;
+      border: none;
+      padding: 1.25rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    
+    .friend-btn:hover {
+      background: rgba(30, 58, 138, 0.5);
+      transform: scale(1.03);
+    }
+    
+    .friend-btn:active {
+      transform: scale(0.97);
+    }
+    
+    .friend-btn.super {
+      background: linear-gradient(45deg, #fbbf24, #f59e0b);
+      color: #0f172a;
+    }
+    
+    .friend-btn.super:hover {
+      background: linear-gradient(45deg, #f59e0b, #ea580c);
+    }
+    
     .btn {
       background: white;
       color: #1e293b;
@@ -92,6 +138,7 @@
       cursor: pointer;
       box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
       transition: all 0.3s ease;
+      margin-top: 1rem;
     }
     
     .btn:hover {
@@ -118,6 +165,38 @@
       vertical-align: middle;
     }
     
+    .time-label {
+      font-size: 2.5rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+    
+    .time-value-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    
+    @media (min-width: 768px) {
+      .time-value-container {
+        flex-direction: row;
+      }
+    }
+    
+    .time-unit {
+      font-size: 2.5rem;
+      margin-top: 0.5rem;
+    }
+    
+    @media (min-width: 768px) {
+      .time-unit {
+        margin-top: 0;
+      }
+    }
+    
     @media (min-width: 768px) {
       .time-sentence {
         font-size: 3rem;
@@ -125,21 +204,29 @@
       .time-sentence .time-value {
         font-size: 5rem;
       }
+      .time-label {
+        font-size: 3rem;
+      }
+      .time-unit {
+        font-size: 3rem;
+      }
     }
     
     .quote {
-      font-family: 'Ma Shan Zheng', cursive;
-      font-size: 1.75rem;
+      font-family: 'Arial', sans-serif;
+      font-size: 1.25rem;
       line-height: 1.5;
       max-width: 600px;
       margin: 0 auto;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-      letter-spacing: 0.05em;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+      color: rgba(255, 255, 255, 0.9);
+      font-style: normal;
+      font-weight: 400;
     }
     
     @media (min-width: 768px) {
       .quote {
-        font-size: 2.25rem;
+        font-size: 1.5rem;
       }
     }
     
@@ -281,6 +368,51 @@
       }
     }
     
+    .share-container {
+      max-width: 500px;
+      width: 100%;
+      margin: 2rem auto;
+      text-align: center;
+    }
+    
+    .share-canvas {
+      max-width: 100%;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      margin-bottom: 1.5rem;
+    }
+    
+    .save-btn {
+      background: rgba(30, 58, 138, 0.3);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .save-btn:hover {
+      background: rgba(30, 58, 138, 0.5);
+      transform: scale(1.05);
+    }
+    
+    .save-btn:active {
+      transform: scale(0.95);
+    }
+    
+    .download-note {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 1rem;
+      font-style: italic;
+    }
+    
     .fade-in {
       animation: fadeIn 0.5s ease forwards;
     }
@@ -304,73 +436,158 @@
   <div class="background-decoration" id="backgroundDecoration"></div>
   
   <div class="slide-container">
-    <!-- Slide 0: Cover -->
+    <!-- Slide 0: Friendship question -->
     <div class="slide active" id="slide-0">
+      <div class="friendship-question fade-in">我们是好朋友嘛？</div>
+      <div class="friendship-buttons fade-in">
+        <button class="friend-btn super" id="superFriendBtn">是超级好的朋友</button>
+      </div>
+    </div>
+    
+    <!-- Slide 1: Cover -->
+    <div class="slide hidden" id="slide-1">
       <h1 class="cover-title fade-in">你的专属2025年度报告</h1>
       <button class="btn fade-in" id="startBtn">去看看&gt;</button>
     </div>
     
-    <!-- Slides 1-7: Time calculations with new text -->
-    <div class="slide hidden" id="slide-1">
-      <div class="time-sentence fade-in">
-        2025年我们又做了<span class="time-value">12</span>个月的朋友
-      </div>
-      <p class="quote fade-in">星辰不会因为云层而停止闪耀，你也不会因为挫折而失去光芒。</p>
-    </div>
-    
+    <!-- Slides 2-8: Time calculations for both modes (2025年你度过了...) -->
     <div class="slide hidden" id="slide-2">
-      <div class="time-sentence fade-in">
-        2025年我们又做了<span class="time-value">52.14</span>周的朋友
+      <div class="time-label fade-in">2025年你度过了</div>
+      <div class="time-value-container fade-in">
+        <span class="time-value" id="month-value">0</span>
+        <span class="time-unit">月</span>
       </div>
-      <p class="quote fade-in">溪流从不羡慕大海的辽阔，它只专注于穿越自己的山谷。</p>
+      <p class="quote fade-in">时间像沙漏，悄悄从指缝间溜走，却在心里留下痕迹。</p>
     </div>
     
     <div class="slide hidden" id="slide-3">
-      <div class="time-sentence fade-in">
-        2025年我们又做了<span class="time-value">365</span>天的朋友
+      <div class="time-label fade-in">2025年你度过了</div>
+      <div class="time-value-container fade-in">
+        <span class="time-value" id="week-value">0</span>
+        <span class="time-unit">周</span>
       </div>
-      <p class="quote fade-in">风筝逆风而上，人生亦是如此——压力是飞翔的伙伴。</p>
+      <p class="quote fade-in">每一周都是新的开始，带着希望和勇气继续前行。</p>
     </div>
     
     <div class="slide hidden" id="slide-4">
-      <div class="time-sentence fade-in">
-        2025年我们又做了<span class="time-value">8,760</span>小时的朋友
+      <div class="time-label fade-in">2025年你度过了</div>
+      <div class="time-value-container fade-in">
+        <span class="time-value" id="day-value">0</span>
+        <span class="time-unit">天</span>
       </div>
-      <p class="quote fade-in">种子破土前总在黑暗中积蓄力量，你的努力正在看不见的地方生长。</p>
+      <p class="quote fade-in">每一天都是珍贵的礼物，值得用心去感受和珍惜。</p>
     </div>
     
     <div class="slide hidden" id="slide-5">
-      <div class="time-sentence fade-in">
-        2025年我们又做了<span class="time-value">525,600</span>分钟的朋友
+      <div class="time-label fade-in">2025年你度过了</div>
+      <div class="time-value-container fade-in">
+        <span class="time-value" id="hour-value">0</span>
+        <span class="time-unit">小时</span>
       </div>
-      <p class="quote fade-in">萤火虫的光芒虽小，却能点亮整片夏夜，你的存在同样珍贵。</p>
+      <p class="quote fade-in">每个小时都藏着无限可能，等待你去发现和创造。</p>
     </div>
     
     <div class="slide hidden" id="slide-6">
-      <div class="time-sentence fade-in">
-        2025年我们又做了<span class="time-value">31,536,000</span>秒的朋友
+      <div class="time-label fade-in">2025年你度过了</div>
+      <div class="time-value-container fade-in">
+        <span class="time-value" id="minute-value">0</span>
+        <span class="time-unit">分钟</span>
       </div>
-      <p class="quote fade-in">竹子用四年时间只长3厘米，第五年却每天30厘米——所有成长都有沉淀期。</p>
+      <p class="quote fade-in">每一分钟都是生命的音符，谱写着属于你的乐章。</p>
     </div>
     
     <div class="slide hidden" id="slide-7">
+      <div class="time-label fade-in">2025年你度过了</div>
+      <div class="time-value-container fade-in">
+        <span class="time-value" id="second-value">0</span>
+        <span class="time-unit">秒</span>
+      </div>
+      <p class="quote fade-in">每一秒都是永恒的瞬间，记录着你成长的足迹。</p>
+    </div>
+    
+    <div class="slide hidden" id="slide-8">
+      <div class="time-label fade-in">2025年你度过了</div>
+      <div class="time-value-container fade-in">
+        <span class="time-value" id="millisecond-value">0</span>
+        <span class="time-unit">毫秒</span>
+      </div>
+      <p class="quote fade-in">每一毫秒都是心跳的证明，诉说着生命的奇迹。</p>
+    </div>
+    
+    <!-- Slides 9-15: Time calculations with new text (我们又做了...朋友) -->
+    <div class="slide hidden" id="slide-9">
+      <div class="time-sentence fade-in">
+        2025年我们又做了<span class="time-value">12</span>个月的朋友
+      </div>
+      <p class="quote fade-in">真正的朋友是那些在你忘记带伞时，愿意和你一起淋雨的人。</p>
+    </div>
+    
+    <div class="slide hidden" id="slide-10">
+      <div class="time-sentence fade-in">
+        2025年我们又做了<span class="time-value">52.14</span>周的朋友
+      </div>
+      <p class="quote fade-in">友情不是天天见面，而是即使很久不见，再见时依然如故。</p>
+    </div>
+    
+    <div class="slide hidden" id="slide-11">
+      <div class="time-sentence fade-in">
+        2025年我们又做了<span class="time-value">365</span>天的朋友
+      </div>
+      <p class="quote fade-in">朋友是那些看到你所有缺点，却依然选择站在你身边的人。</p>
+    </div>
+    
+    <div class="slide hidden" id="slide-12">
+      <div class="time-sentence fade-in">
+        2025年我们又做了<span class="time-value">8,760</span>小时的朋友
+      </div>
+      <p class="quote fade-in">最好的友情不需要刻意维持，就像星星不需要刻意闪耀。</p>
+    </div>
+    
+    <div class="slide hidden" id="slide-13">
+      <div class="time-sentence fade-in">
+        2025年我们又做了<span class="time-value">525,600</span>分钟的朋友
+      </div>
+      <p class="quote fade-in">真正的朋友不是帮你擦干眼泪的人，而是让你根本不会流泪的人。</p>
+    </div>
+    
+    <div class="slide hidden" id="slide-14">
+      <div class="time-sentence fade-in">
+        2025年我们又做了<span class="time-value">31,536,000</span>秒的朋友
+      </div>
+      <p class="quote fade-in">友情是两颗心真诚相待，而不是一颗心对另一颗心的敲打。</p>
+    </div>
+    
+    <div class="slide hidden" id="slide-15">
       <div class="time-sentence fade-in">
         2025年我们又做了<span class="time-value">31,536,000,000</span>毫秒的朋友
       </div>
-      <p class="quote fade-in">露珠从不担心太阳升起，因为它知道自己的使命是滋润清晨。</p>
+      <p class="quote fade-in">朋友是那个在你跌倒时，先笑你姿势不够帅，然后再拉你起来的人。</p>
     </div>
     
-    <!-- Slide 8: New Year -->
-    <div class="slide hidden" id="slide-8">
+    <!-- Slide 16: New Year -->
+    <div class="slide hidden" id="slide-16">
       <div class="celebration-bg" id="confettiContainer"></div>
       <div class="celebration-text fade-in">2025完结撒花🎊，2026你好呀🎉</div>
       <div class="new-year-text fade-in">祝你新年快乐！</div>
     </div>
     
-    <!-- Slide 9: Final -->
-    <div class="slide hidden" id="slide-9">
+    <!-- Slide 17: Final -->
+    <div class="slide hidden" id="slide-17">
       <h1 class="final-title fade-in">by Morgan</h1>
       <p class="tech-support fade-in">CCWMORAN慕然科技提供技术支持</p>
+    </div>
+    
+    <!-- Slide 18: Share image -->
+    <div class="slide hidden" id="slide-18">
+      <h2 class="cover-title fade-in" style="font-size: 2.5rem; margin-bottom: 2rem;">生成你的2025年度报告分享图</h2>
+      <div class="share-container fade-in">
+        <canvas id="shareCanvas" class="share-canvas" width="600" height="800"></canvas>
+        <button class="save-btn" id="saveBtn">
+          <i data-lucide="download" class="icon"></i>
+          保存分享图
+        </button>
+        <p class="download-note">如果保存失败请长按图片下载</p>
+      </div>
     </div>
   </div>
   
@@ -410,20 +627,111 @@
     
     // Slide management
     let currentSlide = 0;
-    const totalSlides = 9;
+    let totalSlides = 18; // Updated total slides with share page
+    let isSuperFriend = true; // Always super friend since we removed the other option
+    
+    // Calculate time passed in 2025 based on current date
+    function calculate2025Time() {
+      const now = new Date();
+      const start2025 = new Date(2025, 0, 1); // January 1, 2025
+      const end2025 = new Date(2025, 11, 31, 23, 59, 59, 999); // December 31, 2025
+      
+      // If current time is before 2025, use 0
+      if (now < start2025) {
+        return {
+          months: 0,
+          weeks: 0,
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0,
+          milliseconds: 0
+        };
+      }
+      
+      // If current time is after 2025, use full year
+      if (now > end2025) {
+        return {
+          months: 12,
+          weeks: 52.14,
+          days: 365,
+          hours: 8760,
+          minutes: 525600,
+          seconds: 31536000,
+          milliseconds: 31536000000
+        };
+      }
+      
+      // Calculate time difference in milliseconds
+      const diffMs = now - start2025;
+      
+      // Calculate each unit
+      const milliseconds = diffMs;
+      const seconds = Math.floor(milliseconds / 1000);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const days = Math.floor(hours / 24);
+      
+      // Calculate weeks (52.14 weeks in a year)
+      const weeks = days / 7;
+      
+      // Calculate months (approximate - 30.44 days per month on average)
+      const months = days / 30.44;
+      
+      return {
+        months: months.toFixed(2),
+        weeks: weeks.toFixed(2),
+        days: days,
+        hours: hours,
+        minutes: minutes,
+        seconds: seconds,
+        milliseconds: milliseconds
+      };
+    }
+    
+    // Update time values for the first set of slides
+    function updateTimeValues() {
+      const timeData = calculate2025Time();
+      
+      // Format numbers with commas for larger values
+      function formatNumber(num) {
+        if (typeof num === 'string') num = parseFloat(num);
+        if (num >= 1000) {
+          return num.toLocaleString('zh-CN');
+        }
+        return num.toString();
+      }
+      
+      document.getElementById('month-value').textContent = formatNumber(timeData.months);
+      document.getElementById('week-value').textContent = formatNumber(timeData.weeks);
+      document.getElementById('day-value').textContent = formatNumber(timeData.days);
+      document.getElementById('hour-value').textContent = formatNumber(timeData.hours);
+      document.getElementById('minute-value').textContent = formatNumber(timeData.minutes);
+      document.getElementById('second-value').textContent = formatNumber(timeData.seconds);
+      document.getElementById('millisecond-value').textContent = formatNumber(timeData.milliseconds);
+    }
+    
     const slides = document.querySelectorAll('.slide');
     const pagination = document.getElementById('pagination');
     const progressFill = document.getElementById('progressFill');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const startBtn = document.getElementById('startBtn');
+    const superFriendBtn = document.getElementById('superFriendBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const shareCanvas = document.getElementById('shareCanvas');
     
     // Show initial pagination state
     updatePagination();
     
+    // Friendship button - only one option now
+    superFriendBtn.addEventListener('click', () => {
+      goToSlide(1);
+    });
+    
     // Start button handler
     startBtn.addEventListener('click', () => {
-      goToSlide(1);
+      goToSlide(2);
     });
     
     // Navigation buttons
@@ -439,8 +747,22 @@
       }
     });
     
+    // Save button handler
+    saveBtn.addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.download = '2025-annual-report.png';
+      link.href = shareCanvas.toDataURL('image/png');
+      link.click();
+    });
+    
     // Go to specific slide
     function goToSlide(slideIndex) {
+      // Handle friendship question page
+      if (slideIndex === 1 && currentSlide === 0) {
+        // Don't show pagination on cover page
+        pagination.style.display = 'none';
+      }
+      
       // Add fade out animation to current slide
       slides[currentSlide].classList.add('fade-out');
       
@@ -459,31 +781,105 @@
           slides[currentSlide].classList.add('fade-in');
         }, 10);
         
-        // Update pagination
-        updatePagination();
-        
         // Special handling for celebration slide
-        if (currentSlide === 8) {
+        if (currentSlide === 16) {
           createConfetti('confettiContainer', 50);
         }
+        
+        // Generate share image when entering slide 18
+        if (currentSlide === 18) {
+          generateShareImage();
+        }
+        
+        // Update pagination
+        updatePagination();
       }, 500);
+    }
+    
+    // Generate share image
+    function generateShareImage() {
+      const ctx = shareCanvas.getContext('2d');
+      const width = shareCanvas.width;
+      const height = shareCanvas.height;
+      
+      // Draw gradient background
+      const gradient = ctx.createLinearGradient(0, 0, width, height);
+      gradient.addColorStop(0, '#0c1a33');
+      gradient.addColorStop(0.5, '#0a1428');
+      gradient.addColorStop(1, '#0d1b36');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
+      
+      // Add decorative circles
+      for (let i = 0; i < 5; i++) {
+        const size = Math.random() * 80 + 40;
+        const x = Math.random() * width;
+        const y = Math.random() * height;
+        const opacity = Math.random() * 0.2 + 0.1;
+        
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(56, 189, 248, ${opacity})`;
+        ctx.fill();
+      }
+      
+      // Draw title text
+      ctx.font = 'bold 40px Arial';
+      ctx.fillStyle = '#fbbf24';
+      ctx.textAlign = 'center';
+      ctx.fillText('我的2025专属年度报告', width / 2, height / 3);
+      
+      // Draw subtitle text
+      ctx.font = 'bold 32px Arial';
+      ctx.fillStyle = 'white';
+      ctx.fillText('2025完结撒花，2026你好呀🎉', width / 2, height / 2);
+      
+      // Draw footer text
+      ctx.font = '16px Arial';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+      ctx.fillText('byCCWMORAN', width / 2, height * 0.85);
+      
+      // Add confetti effect
+      for (let i = 0; i < 30; i++) {
+        const size = Math.random() * 10 + 5;
+        const x = Math.random() * width;
+        const y = Math.random() * height * 0.7;
+        const hue = Math.random() * 360;
+        
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fillStyle = `hsl(${hue}, 70%, 60%)`;
+        ctx.fill();
+      }
+      
+      // Add border
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(10, 10, width - 20, height - 20);
     }
     
     // Update pagination UI
     function updatePagination() {
-      // Show/hide pagination
-      pagination.style.display = currentSlide === 0 ? 'none' : 'block';
+      // Skip pagination on friendship question page
+      if (currentSlide === 0) {
+        pagination.style.display = 'none';
+        return;
+      }
       
-      // Update progress bar
+      // Calculate progress
       const progress = (currentSlide / totalSlides) * 100;
       progressFill.style.width = `${progress}%`;
+      
+      // Show pagination for all slides except the first one
+      pagination.style.display = 'block';
       
       // Update button states
       prevBtn.disabled = currentSlide === 0;
       nextBtn.disabled = currentSlide === totalSlides;
       
       // Update button text
-      if (currentSlide === 0) {
+      if (currentSlide === 1) {
+        // Cover page
         nextBtn.innerHTML = '<span>去看看</span><i data-lucide="chevron-right" class="icon"></i>';
       } else if (currentSlide === totalSlides) {
         nextBtn.innerHTML = '<span>完成</span><i data-lucide="chevron-right" class="icon"></i>';
@@ -491,7 +887,7 @@
         nextBtn.innerHTML = '<span>下一页</span><i data-lucide="chevron-right" class="icon"></i>';
       }
       
-      prevBtn.innerHTML = `<i data-lucide="chevron-left" class="icon"></i><span>${currentSlide === 0 ? '' : '上一页'}</span>`;
+      prevBtn.innerHTML = `<i data-lucide="chevron-left" class="icon"></i><span>${currentSlide <= 1 ? '' : '上一页'}</span>`;
       
       // Re-render Lucide icons
       lucide.createIcons();
@@ -525,14 +921,13 @@
     
     // Initialize with proper state
     document.addEventListener('DOMContentLoaded', () => {
-      // Show pagination for slides after cover
-      if (currentSlide > 0) {
-        pagination.style.display = 'block';
-      }
+      // Calculate and display time values
+      updateTimeValues();
       
-      // Create initial confetti for celebration slide if needed
-      if (currentSlide === 8) {
-        createConfetti('confettiContainer', 50);
+      // Initialize share canvas
+      if (shareCanvas) {
+        shareCanvas.width = 600;
+        shareCanvas.height = 800;
       }
     });
   </script>
